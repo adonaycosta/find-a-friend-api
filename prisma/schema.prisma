@@ -38,26 +38,18 @@ model Pet {
   @@map("pets")
 }
 
-model Address {
-  id     String @id @default(uuid())
+model Org {
+  id            String @id @default(uuid())
+  name          String
+  phone         String
+  email         String @unique
+  password_hash String
+
   street String
   city   String
   state  String
 
-  org Org?
-
-  @@map("address")
-}
-
-model Org {
-  id    String  @id @default(uuid())
-  name  String
-  phone String
-  email String?
-
-  pets      Pet[]
-  addressId String  @unique
-  address   Address @relation(fields: [addressId], references: [id])
+  pets Pet[]
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt

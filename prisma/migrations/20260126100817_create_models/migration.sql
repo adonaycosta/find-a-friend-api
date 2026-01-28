@@ -21,21 +21,14 @@ CREATE TABLE "pets" (
 );
 
 -- CreateTable
-CREATE TABLE "address" (
-    "id" TEXT NOT NULL,
-    "street" TEXT NOT NULL,
-    "city" TEXT NOT NULL,
-    "state" TEXT NOT NULL,
-
-    CONSTRAINT "address_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "orgs" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "phone" TEXT NOT NULL,
     "email" TEXT,
+    "street" TEXT NOT NULL,
+    "city" TEXT NOT NULL,
+    "state" TEXT NOT NULL,
     "addressId" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
@@ -48,6 +41,3 @@ CREATE UNIQUE INDEX "orgs_addressId_key" ON "orgs"("addressId");
 
 -- AddForeignKey
 ALTER TABLE "pets" ADD CONSTRAINT "pets_orgId_fkey" FOREIGN KEY ("orgId") REFERENCES "orgs"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "orgs" ADD CONSTRAINT "orgs_addressId_fkey" FOREIGN KEY ("addressId") REFERENCES "address"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -15,7 +15,8 @@
 				"noUnusedVariables": "off"
 			},
 			"suspicious": {
-				"noGlobalIsNan": "off"
+				"noGlobalIsNan": "off",
+				"noExplicitAny": "off"
 			},
 			"style": {
 				"noNonNullAssertion": "off",
