@@ -51,13 +51,12 @@ describe("Find Pet By City Service", () => {
     );
   });
 
-  it("Should not be able to find pets with non existent city", async () => {
-    await expect(
-      sut.execute({
-        city: "San Francisco",
-        size: "MEDIUM",
-      }),
-    ).rejects.toBeInstanceOf(ResourceNotFoundError);
+  it("Should be able return empty [] with not found city", async () => {
+    const { pets } = await sut.execute({
+      city: "Not found city",
+    });
+
+    expect(pets).toEqual([]);
   });
 
   it("Should not be able to find pet without city", async () => {

@@ -16,16 +16,44 @@ export class PrismaPetRepository implements PetsRepository {
   }
 
   async findById(id: string) {
-    throw new Error("Method not implemented.");
+    const pet = await prisma.pet.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    return pet;
   }
 
   async searchMany(query: searchPetsQueryParams) {
-    throw new Error("Method not implemented.");
+    const pets = await prisma.pet.findMany({
+      where: {
+        orgId: { in: query.orgIds },
+        age: query.age,
+        size: query.size,
+        specie: query.specie,
+      },
+    });
+
+    return pets;
   }
+
   async update(data: updatePetData) {
-    throw new Error("Method not implemented.");
+    const pet = await prisma.pet.update({
+      where: {
+        id: data.id,
+      },
+      data,
+    });
+
+    return pet;
   }
+
   async delete(id: string) {
-    throw new Error("Method not implemented.");
+    await prisma.pet.delete({
+      where: {
+        id,
+      },
+    });
   }
 }

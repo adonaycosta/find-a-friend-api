@@ -1,8 +1,8 @@
 import type { Pet } from "@prisma/client";
+import { prisma } from "@/lib/prisma.js";
 import type { OrgsRepository } from "@/repositories/orgs/orgs-repository.js";
 import type { PetsRepository } from "@/repositories/pets/pets-repository.js";
 import { CityIsRequiredError } from "../errors/city-required-error.js";
-import { ResourceNotFoundError } from "../errors/resource-not-found-error.js";
 
 export interface findPetQueryParams {
   city: string;
@@ -27,16 +27,16 @@ export class FindPetByCityService {
     age,
     size,
   }: findPetQueryParams): Promise<findPetByCityServiceResponse> {
-    const normalizedCity = city.trim().toLowerCase();
-
-    if (!normalizedCity || normalizedCity === "") {
+    if (!city.trim()) {
       throw new CityIsRequiredError();
     }
 
-    const orgs = await this.orgsRepository.findManyByCity(normalizedCity);
+    const orgs = await this.orgsRepository.findManyByCity(city);
 
     if (orgs.length === 0) {
-      throw new ResourceNotFoundError();
+      return {
+        pets: [],
+      };
     }
 
     const pets = await this.petsRepository.searchMany({

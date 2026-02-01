@@ -10,6 +10,7 @@ export class PrismaOrgsRepository implements OrgsRepository {
 
     return org;
   }
+
   async findByEmail(email: string): Promise<Org | null> {
     const org = await prisma.org.findUnique({
       where: {
@@ -29,7 +30,16 @@ export class PrismaOrgsRepository implements OrgsRepository {
 
     return org;
   }
-  findManyByCity(city: string): Promise<Org[]> {
-    throw new Error("Method not implemented.");
+
+  async findManyByCity(city: string) {
+    const orgs = await prisma.org.findMany({
+      where: {
+        city: {
+          equals: city.trim(),
+          mode: "insensitive",
+        },
+      },
+    });
+    return orgs;
   }
 }
