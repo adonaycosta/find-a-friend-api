@@ -30,8 +30,8 @@ This project was developed as a **study challenge**, with the goal of improving 
 * TypeScript
 * Prisma
 * Docker
-# Vite
-# Zod
+* Vite
+* Zod
 
 ---
 
