@@ -16,7 +16,7 @@ describe("Authenticate (e2e)", () => {
       name: "Golden Paws Cat Rescue",
       email: "adoptions@goldenpawscats.org",
       password: "1234567",
-      phone: "+14155559877",
+      phone: "+5511999999999",
       street: "780 Valencia Street",
       city: "San Francisco",
       state: "CA",

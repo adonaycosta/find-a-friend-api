@@ -2,7 +2,6 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { InMemoryOrgsRepository } from "@/repositories/orgs/in-memory-orgs-repository.js";
 import { InMemoryPetsRepository } from "@/repositories/pets/in-memory-pets-repository.js";
 import { CityIsRequiredError } from "../errors/city-required-error.js";
-import { ResourceNotFoundError } from "../errors/resource-not-found-error.js";
 import { FindPetByCityService } from "./find-pet-by-city-service.js";
 
 let petsRepository: InMemoryPetsRepository;

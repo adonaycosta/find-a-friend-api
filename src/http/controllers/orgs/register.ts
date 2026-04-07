@@ -8,7 +8,13 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
     name: z.string().min(2),
     email: z.email(),
     password: z.string().min(7),
-    phone: z.string(),
+    phone: z
+      .string()
+      .min(10)
+      .transform((phone) => phone.replace(/\D/g, ""))
+      .refine((phone) => /^[1-9]\d{11,14}$/.test(phone), {
+        error: "Invalid WhatsApp number. Use country code + area code + number: 5511999999999.",
+      }),
     street: z.string(),
     city: z.string(),
     state: z.string(),
